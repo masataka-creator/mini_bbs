@@ -8,8 +8,11 @@ if (!empty($_POST)) {
     if ($_POST['email'] === '') {
 	      $error['email'] = 'blank';
 		}
+		if (!preg_match('/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/',$_POST['email']) ){
+	      $error['email'] = 'path';
+	  }
 		if (strlen($_POST['number']) >6) {
-			  $error['number'] = 'length';
+			  $error['number'] = 'small';
 	  }
 	  if ($_POST['number'] === '') {
 		  	$error['number'] = 'blank';
@@ -66,13 +69,16 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 					<?php if ($error['email'] === 'blank'): ?>
 					<p class="error">*メールアドレスを入力して下さい</p>
 					<?php endif; ?>
+					<?php if ($error['email'] === 'path'): ?>
+					<p class="error">*メールアドレスの形式で入力して下さい</p>
+					<?php endif; ?>
 		<dt>社員番号<span class="required">必須</span></dt>
 		<dd>
         	<input type="number" name="number" size="10" maxlength="20" value="<?php print(htmlspecialchars($_POST['number'], ENT_QUOTES)); ?>" />
 					<?php if ($error['number'] === 'blank'): ?>
 					<p class="error">*社員番号を入力して下さい</p>
 					<?php endif; ?>
-					<?php if ($error['number'] === 'length'): ?>
+					<?php if ($error['number'] === 'small'): ?>
 					<p class="error">*社員番号は6文字以内の数字で入力して下さい</p>
 					<?php endif; ?>
 		<dt>パスワード<span class="required">必須</span></dt>
