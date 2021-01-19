@@ -1,5 +1,6 @@
 <?php
 session_start();
+require('../dbconnect.php');
 
 if (!empty($_POST)) {
     if ($_POST['name'] === '') {
@@ -29,6 +30,14 @@ if (!empty($_POST)) {
 				if ($ext != 'jpg' && $ext != 'gif' && $ext != 'png') {
 					  $error['image'] = 'type';
 				}
+		}
+		if(empty($error)) {
+			$member = $db->prepare('SELECT COUNT(*) AS cnt FROM members WHERE email=?');
+			$member->execute(array($_POST['email']));
+			$record = $member->fetch();
+			if ($record['cnt'] > 0) {
+				$error['email'] = 'duplicate';
+			}
 		}
     if (empty($error)) {
 			 $image = date('YmdHis') . $_FILES['image']['name'];
@@ -80,6 +89,9 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 					<?php endif; ?>
 					<?php if ($error['email'] === 'path'): ?>
 					<p class="error">*メールアドレスの形式で入力して下さい</p>
+					<?php endif; ?>
+					<?php if ($error['email'] === 'duplicate'): ?>
+					<p class="error">*指定されたメールアドレスは既に登録されています</p>
 					<?php endif; ?>
 		<dt>社員番号<span class="required">必須</span></dt>
 		<dd>
