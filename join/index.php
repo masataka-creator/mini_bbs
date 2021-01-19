@@ -39,6 +39,14 @@ if (!empty($_POST)) {
 				$error['email'] = 'duplicate';
 			}
 		}
+		if(empty($error)) {
+			$member = $db->prepare('SELECT COUNT(*) AS cnt FROM members WHERE number=?');
+			$member->execute(array($_POST['number']));
+			$record = $member->fetch();
+			if ($record['cnt'] > 0) {
+				$error['number'] = 'duplicate';
+			}
+		}
     if (empty($error)) {
 			 $image = date('YmdHis') . $_FILES['image']['name'];
 			 move_uploaded_file($_FILES['image']['tmp_name'],'../member_picture/' . $image);
@@ -101,6 +109,9 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 					<?php endif; ?>
 					<?php if ($error['number'] === 'small'): ?>
 					<p class="error">*社員番号は6文字以内の数字で入力して下さい</p>
+					<?php endif; ?>
+					<?php if ($error['number'] === 'duplicate'): ?>
+					<p class="error">*指定された社員番号は既に登録されています</p>
 					<?php endif; ?>
 		<dt>パスワード<span class="required">必須</span></dt>
 		<dd>
