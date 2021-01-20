@@ -76,11 +76,14 @@ $posts = $db->query('SELECT m.name, m.picture, p.*FROM members m, posts p WHERE 
     <p class="day"><a href="view.php?id=<?php print(htmlspecialchars($post['id'])); ?>"><?php print(htmlspecialchars($post['created'],ENT_QUOTES)); ?></a>
 
     <?php if ($post['reply_message_id'] > 0):?>
-<a href="view.php?id=">
+<a href="view.php?id=<?php print(htmlspecialchars($post['reply_message_id'], ENT_QUOTES)); ?>">
 返信元のメッセージ</a>
 <?php endif; ?>
-[<a href="delete.php?id=<?php print(htmlspecialchars($post['reply_message_id'],ENT_QUOTES)); ?>"
+
+<?php if ($_SESSION['id'] == $post['member_id']): ?>
+[<a href="delete.php?id=<?php print(htmlspecialchars($post['id'])); ?>"
 style="color: #F33;">削除</a>]
+<?php endif; ?>
     </p>
     </div>
     <?php endforeach; ?>
