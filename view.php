@@ -31,7 +31,7 @@ $posts->execute(array($_REQUEST['id']));
 
 <?php if ($post = $posts->fetch()): ?>
     <div class="msg">
-    <img src="member_picture/<?php print(htmlspecialchars($post['picture'])); ?>" />
+    <img src="member_picture/<?php print(htmlspecialchars($post['picture'])); ?>"width="400px" />
     <p><?php print(htmlspecialchars($post['message'])); ?><span class="name">（<?php print(htmlspecialchars($post['name'])); ?>）</span></p>
     <p class="day"><?php print(htmlspecialchars($post['created'])); ?></p>
     </div>
