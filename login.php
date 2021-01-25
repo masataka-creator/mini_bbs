@@ -45,19 +45,19 @@ if ($member) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="style.css" />
-<title>ログインする</title>
+<title>株式会社○○コミュニティーサイト</title>
 </head>
 
 <body>
 <div id="wrap">
   <div id="head">
-    <h1>ログインする</h1>
+    <h1>株式会社○○コミュニティーサイト</h1>
   </div>
   <div id="content">
     <div id="lead">
       <p>社員番号とパスワードを記入してログインしてください。</p>
-      <p>入会手続きがまだの方はこちらからどうぞ。</p>
-      <p>&raquo;<a href="join/">入会手続きをする</a></p>
+      <p>登録がまだの場合は管理者による登録が必要です</p>
+      <p>&raquo;<a href="admin/">管理者による登録画面へ</a></p>
     </div>
     <form action="" method="post">
       <dl>

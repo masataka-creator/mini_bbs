@@ -2,6 +2,12 @@
 session_start();
 require('dbconnect.php');
 
+if(!isset($_SERVER['HTTP_REFERER'])){
+  // redirect them to your desired location
+  header('location:./login.php');
+  exit;
+}
+
 if (isset($_SESSION['id']) && $_SESSION['time']+3600>time()) {
   $_SESSION['time'] = time();
   $members = $db->prepare('SELECT*FROM members WHERE id=?');

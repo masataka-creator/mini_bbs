@@ -1,6 +1,14 @@
 <?php
 session_start();
 require('../dbconnect.php');
+if($_SESSION['admin_login'] == false){
+					 header("Location:./index.php");
+}
+if(!isset($_SERVER['HTTP_REFERER'])){
+	// redirect them to your desired location
+	header('location:../login.php');
+	exit;
+}
 
 if (!empty($_POST)) {
     if ($_POST['name'] === '') {
@@ -52,7 +60,7 @@ if (!empty($_POST)) {
 			 move_uploaded_file($_FILES['image']['tmp_name'],'../member_picture/' . $image);
 			 $_SESSION['join'] = $_POST;
 			 $_SESSION['join']['image'] = $image;
-       header('Location: check.php');
+       header('Location: ../join/check.php');
 	  exit();
     }
 }
@@ -134,7 +142,7 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 					<p class="error">*恐れ入りますが、画像を改めて指定して下さい</p>
 					<?php endif; ?>
 	</dl>
-	<div><input type="submit" value="入力内容を確認する" /></div>
+	<div><input type="submit" value="入力内容を確認する" /><a href="../logout.php">&laquo;&nbsp;ログアウトしてトップページに戻る</a></div>
 </form>
 </div>
 </body>
