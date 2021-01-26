@@ -65,7 +65,7 @@ $posts->execute();
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>ひとこと掲示板</title>
+	<title>株式会社○○コミュニティーサイト</title>
 
 	<link rel="stylesheet" href="style.css" />
 </head>
@@ -73,7 +73,7 @@ $posts->execute();
 <body>
 <div id="wrap">
   <div id="head">
-    <h1>ひとこと掲示板</h1>
+    <h1>株式会社○○コミュニティーサイト</h1>
   </div>
   <div id="content">
   	<div style="text-align: right"><a href="logout.php">ログアウト</a></div>
@@ -88,6 +88,13 @@ $posts->execute();
       <div>
         <p>
           <input type="submit" value="投稿する" />
+          <h2><dt>感謝カウンター✖️<?php
+$sql =  "SELECT count(*) as cnt FROM posts WHERE message = 'ありがとう'";
+$stmt = $db -> query($sql);
+$stmt -> execute();
+$count = $stmt->fetch(PDO::FETCH_ASSOC);
+echo $count['cnt'];
+?></dt></h2>
         </p>
       </div>
     </form>
