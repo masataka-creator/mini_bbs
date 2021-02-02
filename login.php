@@ -45,13 +45,13 @@ if ($member) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="style.css" />
-<title>株式会社○○コミュニティーサイト</title>
+<title>one-group</title>
 </head>
 
 <body>
 <div id="wrap">
   <div id="head">
-    <h1>株式会社○○コミュニティーサイト</h1>
+    <h1>one-group</h1>
   </div>
   <div id="content">
     <div id="lead">
